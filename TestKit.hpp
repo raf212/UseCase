@@ -4858,7 +4858,7 @@ public:
         std::uint32_t slot
     ) noexcept
     {
-        const SD::ConstRSSpan row = MetrixViewRow_(slot);
+        const SD::ConstRSSpan row = MatrixViewRow_(slot);
         return std::span<const SD::RegionSchemaRecord>(row.data(), row.size());
     }
 
