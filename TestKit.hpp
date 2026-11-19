@@ -4986,7 +4986,7 @@ inline bool SchemaABIAndGeometry() noexcept
         !SD::ValidateStortedRegionSchema(ordinary, MINIMUM_APC_CELL_COUNT, 8u);
 
     SD::RegionSchemaRecord double_buffer = ordinary;
-    double_buffer.Region = MacroColumnOfAPC::AUX_SLOT;
+    double_buffer.Region = MacroColumnOfAPC::BIAS_SLOT;
     double_buffer.Protocol = SD::SchemaProtocols::DOUBLE_BUFFERED;
 
     const bool double_ok = SD::SealDesiredSchema(
@@ -5405,7 +5405,7 @@ inline bool DeviceViewAndProtocolStorage() noexcept
         ADS::RegionBit(MacroColumnOfAPC::STATE_SLOT) |
         ADS::RegionBit(MacroColumnOfAPC::ERROR_SLOT) |
         ADS::RegionBit(MacroColumnOfAPC::WEIGHT_SLOT) |
-        ADS::RegionBit(MacroColumnOfAPC::AUX_SLOT);
+        ADS::RegionBit(MacroColumnOfAPC::BIAS_SLOT);
     constexpr std::uint8_t active_count = 5u;
     constexpr std::uint16_t row_cells =
         active_count * static_cast<std::uint16_t>(SD::RegionSchemaCellCount());
@@ -5501,7 +5501,7 @@ inline bool DeviceViewAndProtocolStorage() noexcept
         ) ||
         !MakeSchema(
             schemas,
-            MacroColumnOfAPC::AUX_SLOT,
+            MacroColumnOfAPC::BIAS_SLOT,
             SD::DataTypeOfMacroColumn::UINT64_T,
             SD::SchemaProtocols::DOUBLE_BUFFERED,
             1u,
@@ -5556,7 +5556,7 @@ inline bool DeviceViewAndProtocolStorage() noexcept
         MacroColumnOfAPC::STATE_SLOT,
         MacroColumnOfAPC::ERROR_SLOT,
         MacroColumnOfAPC::WEIGHT_SLOT,
-        MacroColumnOfAPC::AUX_SLOT
+        MacroColumnOfAPC::BIAS_SLOT
     };
 
     bool row_ok = row.size() == active_count;
@@ -5617,7 +5617,7 @@ inline bool DeviceViewAndProtocolStorage() noexcept
     auto weight = apc.BuildAViewOverRegion<float>(MacroColumnOfAPC::WEIGHT_SLOT);
     auto queue_view = apc.BuildAViewOverRegion<float>(MacroColumnOfAPC::ERROR_SLOT);
     auto double_view = apc.BuildAViewOverRegion<std::uint64_t>(
-        MacroColumnOfAPC::AUX_SLOT
+        MacroColumnOfAPC::BIAS_SLOT
     );
     auto wrong_type = apc.BuildAViewOverRegion<double>(
         MacroColumnOfAPC::BOTTOM_UP_SLOT
